@@ -1,7 +1,7 @@
 chromeapps-storage
 ================
 
-See the [component page](http://webapplications-kr.github.io/chromeapps-storage) for more information.
+See the [component page](http://chromeappswebcomponents.github.io/chromeapps-storage) for more information.
 
 ## Getting Started
 
