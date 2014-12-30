@@ -1,8 +1,12 @@
-chromeapps-storage
+chrome-storage
 ================
 
-See the [component page](http://chromeappswebcomponents.github.io/chromeapps-storage) for more information.
+See the [component page](http://chromeappswebcomponents.github.io/chrome-storage) for more information.
 
 ## Getting Started
 
-We've put together a [guide for chromeapps-storage](http://www.polymer-project.org/docs/start/reusableelements.html) to help get you rolling.
+Load this component to Chrome as Chrome Apps.
+
+# Test
+
+Unfortunately this components doesn't supports testsuite

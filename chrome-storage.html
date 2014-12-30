@@ -1,0 +1,75 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <chrome-storage></chrome-storage>
+
+@element chrome-storage
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage [chrome.storage - Google Chrome](http://goo.gl/FC7fcN)
+-->
+<polymer-element name="chrome-storage" attributes="name value autosave">
+<script>
+
+  Polymer({
+    storage: 'sync',
+
+    name: '',
+
+    value: null,
+
+    autosave: false,
+
+    nameChanged: function(oldName, newName) {
+      this.load(newName);
+    },
+
+    valueChanged: function(oldValue, newValue) {
+      if (this.autosave) {
+        this.save(newItems);
+      }
+    },
+
+    load: function(key) {
+      chrome.storage[storage].get(key, function() {
+        this.asyncFire('chrome-storage-load');
+      }.bind(this));
+    },
+
+    save: function(value) {
+      var item = {};
+      item[name] = value;
+      chrome.storage[storage].set(item, function() {
+        this.valuy = value;
+        this.asyncFire('chrome-storage-save');
+      });
+    },
+
+    remove: function(key) {
+      chrome.storage[storage].remove(key, function() {
+        value = null;
+        this.asyncFire('chrome-storage-remove');
+      });
+    },
+
+    remove: function(key) {
+      chrome.storage[storage].clear(function() {
+        name = '';
+        value = null;
+        this.asyncFire('chrome-storage-clear');
+      });
+    },
+
+    getBytesInUse: function() {
+      chrome.storage[storage].getBytesInUse(name, function(bytesInUse) {
+        this.asyncFire('chrome-storage-bytes-in-use', bytesInUse);
+      });
+    }
+  });
+
+</script>
+</polymer-element>
