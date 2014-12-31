@@ -12,7 +12,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage [chrome.storage - Google Chrome](http://goo.gl/FC7fcN)
 -->
-<polymer-element name="chrome-storage" attributes="name value autosave">
+<polymer-element name="chrome-storage" attributes="storage name value autosave">
 <script>
 
   Polymer({
@@ -35,39 +35,40 @@ Element providing solution to no problem in particular.
     },
 
     load: function(key) {
-      chrome.storage[storage].get(key, function() {
-        this.asyncFire('chrome-storage-load');
-      }.bind(this));
+      chrome.storage[this.storage].get(key, this.delegate('load'));
     },
 
     save: function(value) {
       var item = {};
-      item[name] = value;
-      chrome.storage[storage].set(item, function() {
-        this.valuy = value;
-        this.asyncFire('chrome-storage-save');
-      });
+      if (value) {
+        this.value = value;
+      }
+      item[name] = this.value;
+      chrome.storage[this.storage].set(item, this.delegate('save'));
     },
 
     remove: function(key) {
-      chrome.storage[storage].remove(key, function() {
-        value = null;
-        this.asyncFire('chrome-storage-remove');
-      });
+      chrome.storage[this.storage].remove(key, this.delegate('remove', function(items) {
+        this.value = null;
+      }));
     },
 
-    remove: function(key) {
-      chrome.storage[storage].clear(function() {
-        name = '';
-        value = null;
-        this.asyncFire('chrome-storage-clear');
-      });
+    clear: function() {
+      chrome.storage[this.storage].clear(this.delegate('clear', function(items) {
+        this.name = '';
+        this.value = null;
+      }));
     },
 
     getBytesInUse: function() {
-      chrome.storage[storage].getBytesInUse(name, function(bytesInUse) {
-        this.asyncFire('chrome-storage-bytes-in-use', bytesInUse);
-      });
+      chrome.storage[this.storage].getBytesInUse(name, this.delegate('bytes-in-use'));
+    },
+
+    delegate: function(event, preFire) {
+      return function(detail) {
+        preFire(detail).bind(this);
+        this.asyncFire('chrome-storage-' + event, detail);
+      }.bind(this);
     }
   });
 
