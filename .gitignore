@@ -2,5 +2,3 @@ node_modules
 dist
 .sass-cache
 .tmp
-demo/demo-vulcanize.*
-demo/libs
