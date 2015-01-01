@@ -43,7 +43,7 @@ Element providing solution to no problem in particular.
       if (value) {
         this.value = value;
       }
-      item[name] = this.value;
+      item[this.name] = this.value;
       chrome.storage[this.storage].set(item, this.delegate('save'));
     },
 

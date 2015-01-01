@@ -10,7 +10,9 @@ window.addEventListener('polymer-ready', function() {
   });
 
   storage.addEventListener('chrome-storage-remove', function(e) {
-    console.log('event> chrome-storage-remove');
+    console.log('event> chrome-storage-remove has done but we will clean up');
+
+    storage.clear();
   });
 
   storage.addEventListener('chrome-storage-clear', function(e) {
@@ -18,17 +20,14 @@ window.addEventListener('polymer-ready', function() {
   });
 
   storage.addEventListener('chrome-storage-bytes-in-use', function(e) {
-    console.log('event> chrome-storage-bytes-in-use', e.detail);
+    console.log('event> chrome-storage-bytes-in-use. now we will remove them', e.detail);
+
+    storage.remove('chrome');
   });
 
   console.log('storage is ready', storage.name, storage.value);
 
-  storage.value = 'storage';
+  storage.value = 'my value';
   storage.save();
-
   storage.getBytesInUse();
-
-  storage.remove('chrome');
-
-  storage.clear();
 });
