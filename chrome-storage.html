@@ -66,7 +66,7 @@ Element providing solution to no problem in particular.
 
     delegate: function(event, preFire) {
       return function(detail) {
-        preFire(detail).bind(this);
+        preFire && preFire.call(this, detail);
         this.asyncFire('chrome-storage-' + event, detail);
       }.bind(this);
     }
