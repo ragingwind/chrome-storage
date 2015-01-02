@@ -4,7 +4,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
   var width = 500;
   var height = 300;
 
-  chrome.app.window.create('demo-vulcanize.html', {
+  chrome.app.window.create('demo.html', {
     id: 'main',
     bounds: {
       width: width,
