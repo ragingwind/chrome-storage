@@ -30,12 +30,14 @@ Element providing solution to no problem in particular.
 
     valueChanged: function(oldValue, newValue) {
       if (this.autosave) {
-        this.save(newItems);
+        this.save(newValue);
       }
     },
 
     load: function(key) {
-      chrome.storage[this.storage].get(key, this.delegate('load'));
+      chrome.storage[this.storage].get(key, this.delegate('load', function(items) {
+	this.value = items[this.name];
+      }));
     },
 
     save: function(value) {
